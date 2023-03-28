@@ -1,0 +1,29 @@
+# Spring Boot Build Output
+target/
+build/
+out/
+build.log
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# Gradle files
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Logs
+logs/
+*.log
+*.log.*
+*.access
+*.event
+
+# Other
+*.class
+*.jar
+*.war
+*.ear
+*.xml
+*.properties
