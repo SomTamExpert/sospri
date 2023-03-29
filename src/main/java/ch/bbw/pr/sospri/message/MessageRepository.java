@@ -1,5 +1,6 @@
 package ch.bbw.pr.sospri.message;
 
+import ch.bbw.pr.sospri.channel.Channel;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -7,8 +8,9 @@ import org.springframework.data.repository.CrudRepository;
  * @author Peter Rutschmann
  * @version 15.03.2023
  */
-//                                                         Klasse, id-Typ
 public interface MessageRepository extends CrudRepository<Message, Long> {
-   //Da wir eine embedded database verwenden, braucht es keine Conecction Information.
+     Iterable<Message> findAllByChannelId(Long channelId);
+
+
 }
 

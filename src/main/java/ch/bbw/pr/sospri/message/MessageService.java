@@ -1,5 +1,6 @@
 package ch.bbw.pr.sospri.message;
 
+import ch.bbw.pr.sospri.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,10 @@ public class MessageService {
    public Iterable<Message> getAll() {
       return repository.findAll();
    }
+
+    public Iterable<Message> getAllByChannelId(Long channelId) {
+       return repository.findAllByChannelId(channelId);
+    }
 
     public Message getById(Long id) {
         return repository.findById(id).get();

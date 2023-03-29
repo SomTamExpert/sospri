@@ -42,4 +42,6 @@ public class Member {
     private String username;
     private String authority;
     private String challenge;
+
+
 }
