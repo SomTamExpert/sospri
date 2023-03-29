@@ -48,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .sessionManagement()
-                .maximumSessions(10) // allow only one session at a time for a user
+                .maximumSessions(30) // allow only one session at a time for a user
                 .maxSessionsPreventsLogin(true) // prevent new login when the maximum sessions limit is reached
                 .expiredUrl("/login?expired") // redirect to the login page after session expires
                 .and()
@@ -56,7 +56,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/get-members").hasAuthority("admin")
-                .antMatchers("/get-channel").hasAnyAuthority("member", "admin", "supervisor")
+                .antMatchers("/get-channel").hasAnyAuthority("member", "admin", "supervisor", "moderator")
+                .antMatchers("/edit-message").hasAnyAuthority("admin", "moderator")
+                .antMatchers("/delete-message").hasAnyAuthority("admin", "moderator")
                 .antMatchers("/h2-console/**").permitAll() // this will allow access to h2-console
                 .and()
                 .formLogin().loginPage("/login").permitAll()

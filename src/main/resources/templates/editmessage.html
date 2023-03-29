@@ -25,24 +25,24 @@
       <div class="row">
         <div class="col-sm-12">
           <div>
-            <h4 style="margin-top: 30px">Edit Member</h4>
+            <h4 style="margin-top: 30px">Edit Message</h4>
             <div class="row">
               <div class=" col-lg-8 col-lg-offset-2">
-                <form id="register-form" method="post" action="" role="form" th:action="@{/edit-member}" th:object="${member}">
+                <form id="register-form" method="post" action="" role="form" th:action="@{/edit-message}" th:object="${message}">
                   <div class="messages"></div>
                   <div class="controls">
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label for="form_name">Firstname *</label>
-                          <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your firstname *" required="required" data-error="Firstname is required." readonly="readonly" th:field="*{prename}">
+                          <label for="form_author">Author *</label>
+                          <input id="form_author" type="text" name="author" class="form-control" placeholder="Please enter the author *" required="required" data-error="Author is required." readonly="readonly" th:field="*{author}">
                           <div class="help-block with-errors"></div>
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label for="form_lastname">Lastname *</label>
-                          <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required." readonly="readonly" th:field="*{lastname}">
+                          <label for="form_origin">Origin *</label>
+                          <input id="form_origin" type="text" name="surname" class="form-control" placeholder="Please enter the origin *" required="required" data-error="Origin is required." readonly="readonly" th:field="*{origin}">
                           <div class="help-block with-errors"></div>
                         </div>
                       </div>
@@ -50,15 +50,15 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label for="form_authority">Authority *</label>
-                          <input id="form_authority" type="text" name="authority" class="form-control" placeholder="Please enter your authority *" required="required" data-error="Valid authority is required." th:field="*{authority}">
+                          <label for="form_content">Content *</label>
+                          <input id="form_content" type="text" name="content" class="form-control" placeholder="Please enter your content *" required="required" data-error="Valid content is required." th:field="*{content}">
                           <div class="help-block with-errors"></div>
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label for="form_authority">ID *</label>
-                          <input id="form_authority" type="text" name="id" class="form-control" placeholder="Please enter your authority *" required="required" data-error="Valid authority is required." readonly="readonly" th:field="*{id}">
+                          <label for="form_id">ID *</label>
+                          <input id="form_id" type="text" name="id" class="form-control" placeholder="Please enter your id *" required="required" data-error="Valid id is required." readonly="readonly" th:field="*{id}">
                           <div class="help-block with-errors"></div>
                         </div>
                       </div>

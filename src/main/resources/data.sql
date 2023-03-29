@@ -8,8 +8,8 @@ INSERT INTO message (id, content, author, origin) VALUES
 /* encrypted password for id 1..4 is 1234* */
 DELETE FROM member;
 INSERT INTO member (id, prename, lastname, password, username, authority, challenge) VALUES
-  (1, 'Albert', 'Einstein', '$2a$10$fdivNJC5meS7mOM.QVKqZeVDHtn46arLIIgik6xbUg2w3eACiazCC', 'albert.einstein', 'admin', 'Herr Oberle'),
-  (2, 'Mac',  'Afee', '$2a$10$Bf6.b0FT30EibG1s.BZmL.14vSyWrQzFNI6q4UXkNmvmkUd3trcfO', 'mac.afee', 'member', 'Herr Rutschmann'),
+  (1, 'Albert', 'Einstein', '$2a$10$hMZ93PbK3CZLJCD22eVBTug95KyYpFNxgdAwvInujUsgtZrl6Qnbe', 'albert.einstein', 'admin', 'Herr Oberle'),
+  (2, 'Mac',  'Afee', '$2a$10$hMZ93PbK3CZLJCD22eVBTug95KyYpFNxgdAwvInujUsgtZrl6Qnbe', 'mac.afee', 'member', 'Herr Rutschmann'),
   (3, 'Tony',  'Stark', '$2a$10$Y5WfhqTlN91E0j88FXVOduxHiwCnSSfgGCrcivzPhzhM889f02.u6', 'toni.stark', 'supervisor', 'Herr Gygax'),
   (4, 'Wilhelm',  'Tell', '$2a$10$4VrJkrAmhq/sPVnBgZ6Gm.S7ctGTHmo.f9QS3jQ2.c8cf1uH4CSfK', 'wilhelm.tell', 'member', 'Herr Lanza'),
-  (5, 'Marco',  'Karpf', '$2a$10$hMZ93PbK3CZLJCD22eVBTug95KyYpFNxgdAwvInujUsgtZrl6Qnbe', 'marco.karpf', 'admin', 'Herr Feuchter');
+  (5, 'Marco',  'Karpf', '$2a$10$hMZ93PbK3CZLJCD22eVBTug95KyYpFNxgdAwvInujUsgtZrl6Qnbe', 'marco.karpf', 'moderator', 'Herr Feuchter');

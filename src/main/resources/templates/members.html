@@ -31,7 +31,6 @@
                 <form id="members-form" method="post" action="" role="form" th:switch="${members}">
                   <p th:case="null">No members available</p>
                   <table class="table table-striped" th:case="*">
-                    <caption>Liste of members</caption>
                     <thead>
                       <tr>
                         <th>Lastname</th>

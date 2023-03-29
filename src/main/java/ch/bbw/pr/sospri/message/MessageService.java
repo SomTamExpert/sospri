@@ -18,6 +18,10 @@ public class MessageService {
       return repository.findAll();
    }
 
+    public Message getById(Long id) {
+        return repository.findById(id).get();
+    }
+
    public void add(Message message) {
       repository.save(message);
    }

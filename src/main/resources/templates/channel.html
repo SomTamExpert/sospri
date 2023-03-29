@@ -50,7 +50,9 @@
 									<h5><a href="#" th:text="${message.author}"></a></h5>
 									<span class="pr_text_green" th:text="${message.origin}"></span>
 									<p th:text="${message.content}"></p>
-								</div>
+                                    <a class="search-tag-link" th:href="@{/edit-message?id={id}(id=${message.id})}">Edit</a>
+                                    <a class="search-tag-link" th:href="@{/delete-message?id={id}(id=${message.id})}">Delete</a>
+                                </div>
 							</li>
 						</ul>
 
@@ -67,6 +69,7 @@
 						</div>
 						<p th:if="${#fields.hasErrors('author')}" th:errors="*{author}" style="color:red"></p>
 						<p th:if="${#fields.hasErrors('content')}" th:errors="*{content}" style="color:red"></p>
+						<p th:if="${#fields.hasErrors('origin')}" th:errors="*{origin}" style="color:red"></p>
 						<p th:if="${#fields.hasErrors('origin')}" th:errors="*{origin}" style="color:red"></p>
 					</form>
 				</div>
