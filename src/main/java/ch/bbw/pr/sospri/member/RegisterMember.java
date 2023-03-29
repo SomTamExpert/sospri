@@ -26,7 +26,8 @@ public class RegisterMember {
    @Size(min = 2, max = 25, message = "the lastname hast to be between 2 and 25 characters long.")
    private String lastname;
 
-   @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$", message = "the password hast to be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.")
+   @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[_@$!%*?&])[A-Za-z\\d_@$!%*?&]{8,}$", message = "the password hast to be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.")
    private String password;
    private String confirmation;
+   private String challenge;
 }

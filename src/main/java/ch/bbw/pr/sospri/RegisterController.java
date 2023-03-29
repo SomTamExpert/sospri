@@ -37,7 +37,7 @@ public class RegisterController {
             bindingResult.rejectValue("confirmation", "password.mismatch", "the passwords do not match");
         }
         if (memberservice.getUserByUsername(registerMember.getPrename().toLowerCase() + "." + registerMember.getLastname().toLowerCase()) != null) {
-            bindingResult.rejectValue("prename", "error.username", "the username is already taken.");
+            bindingResult.rejectValue("prename", "error.prename", "the username is already taken.");
         }
         if (bindingResult.hasErrors()) {
             return "register";

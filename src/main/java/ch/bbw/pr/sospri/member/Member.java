@@ -25,21 +25,21 @@ import javax.validation.constraints.Size;
 @Setter
 @ToString
 public class Member {
-   @Id
-   @GeneratedValue(generator = "generatorMember", strategy = GenerationType.SEQUENCE)
-   @SequenceGenerator(name = "generatorMember", initialValue = 20)
-   private Long id;
+    @Id
+    @GeneratedValue(generator = "generatorMember", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "generatorMember", initialValue = 20)
+    private Long id;
 
-   @NotEmpty(message = "prename may not be empty")
-   @Size(min = 2, max = 25, message = "Die Länge des Vornamens muss 2 bis 25 Zeichen sein.")
-   private String prename;
+    @NotEmpty(message = "prename may not be empty")
+    @Size(min = 2, max = 25, message = "Die Länge des Vornamens muss 2 bis 25 Zeichen sein.")
+    private String prename;
 
-   @NotEmpty(message = "lastname may not be empty")
-   @Size(min = 2, max = 25, message = "Die Länge des Nachnamens 2 bis 25 Zeichen sein.")
-   private String lastname;
+    @NotEmpty(message = "lastname may not be empty")
+    @Size(min = 2, max = 25, message = "Die Länge des Nachnamens 2 bis 25 Zeichen sein.")
+    private String lastname;
 
-   private String password;
-   private String username;
-
-   private String authority;
+    private String password;
+    private String username;
+    private String authority;
+    private String challenge;
 }

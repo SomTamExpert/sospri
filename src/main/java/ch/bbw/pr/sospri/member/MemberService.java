@@ -1,6 +1,10 @@
 package ch.bbw.pr.sospri.member;
 
+import ch.bbw.pr.sospri.security.EncryptionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,40 +18,62 @@ import java.util.Optional;
  */
 @Service
 @Transactional
-public class MemberService {
-   @Autowired
-   private MemberRepository repository;
+public class MemberService implements UserDetailsService {
+    @Autowired
+    private MemberRepository repository;
 
-   public Iterable<Member> getAll() {
-      return repository.findAll();
-   }
+    @Autowired
+    EncryptionService encryptionService;
 
-   public void add(RegisterMember registerMember) {
-      Member member = new Member();
-      member.setPrename(registerMember.getPrename().toLowerCase());
-      member.setLastname(registerMember.getLastname().toLowerCase());
-      member.setPassword(registerMember.getPassword());
-      member.setAuthority("member");
-      member.setUsername(registerMember.getPrename().toLowerCase() + "." + registerMember.getLastname().toLowerCase());
-      repository.save(member);
-   }
+    public Iterable<Member> getAll() {
+        return repository.findAll();
+    }
 
-   public void update(Long id, Member member) {
-      repository.save(member);
-   }
+    public void add(RegisterMember registerMember) {
+        Member member = new Member();
+        member.setPrename(registerMember.getPrename().toLowerCase());
+        member.setLastname(registerMember.getLastname().toLowerCase());
+        member.setPassword(encryptionService.bCryptPasswordEncoder(registerMember.getPassword()));
+        member.setAuthority("member");
+        member.setUsername(registerMember.getPrename().toLowerCase() + "." + registerMember.getLastname().toLowerCase());
+        repository.save(member);
+    }
 
-   public void deleteById(Long id) {
-      repository.deleteById(id);
-   }
+    public void update(Long id, Member member) {
+        repository.save(member);
+    }
 
-   public Member getById(Long id) {
-      Optional<Member> member = repository.findById(id);
-      if (member.isPresent()) return member.get();
-      return null;
-   }
+    public void deleteById(Long id) {
+        repository.deleteById(id);
+    }
 
-   public Member getUserByUsername(String username) {
-      Optional<Member> member = repository.findByUsername(username);
-      return member.orElse(null);
-   }
+    public Member getById(Long id) {
+        Optional<Member> member = repository.findById(id);
+        return member.orElse(null);
+    }
+
+    public Member getUserByUsername(String username) {
+        Optional<Member> member = repository.findByUsername(username);
+        return member.orElse(null);
+    }
+
+    public boolean isChallengeAnswerCorrect(String username, String challengeAnswer) {
+        Member member = getUserByUsername(username);
+        if (member == null || challengeAnswer == null)
+            return false;
+        return member.getChallenge().equals(challengeAnswer);
+    }
+
+    public void resetPassword(String username, String newPassword) {
+        Member member = getUserByUsername(username);
+        if (member != null) {
+            member.setPassword(encryptionService.bCryptPasswordEncoder(newPassword));
+            repository.save(member);
+        }
+    }
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return MemberToUserDetailsMapper.toUserDetails( getUserByUsername(username));
+    }
+
 }

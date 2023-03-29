@@ -1,6 +1,17 @@
-.pr_bg_green {
-    background: #90CC90;
+
+.pr_bg_random_color {
+    background: linear-gradient(to right,
+    #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+    background-size: 1200% 100%;
+    animation: gradient 30s ease infinite;
 }
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 
 .pr_border_solid {
     border-style: solid;
