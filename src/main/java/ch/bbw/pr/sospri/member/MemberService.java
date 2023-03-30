@@ -31,8 +31,8 @@ public class MemberService implements UserDetailsService {
 
     public void add(RegisterMember registerMember) {
         Member member = new Member();
-        member.setPrename(registerMember.getPrename().toLowerCase());
-        member.setLastname(registerMember.getLastname().toLowerCase());
+        member.setPrename(registerMember.getPrename());
+        member.setLastname(registerMember.getLastname() );
         member.setPassword(encryptionService.bCryptPasswordEncoder(registerMember.getPassword()));
         member.setAuthority("member");
         member.setUsername(registerMember.getPrename().toLowerCase() + "." + registerMember.getLastname().toLowerCase());
