@@ -56,8 +56,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/get-members").hasAuthority("admin")
+                .antMatchers("/get-channel?name=Secret").hasAuthority("admin")
                 .antMatchers("/get-channel**").hasAnyAuthority("member", "admin", "supervisor", "moderator")
-                .antMatchers("/edit-message").hasAnyAuthority("admin", "moderator")
+                .antMatchers("/add-channel").hasAnyAuthority("admin", "supervisor")
+                .antMatchers("/edit-channel**").hasAnyAuthority("admin", "supervisor")
+                .antMatchers("/delete-channel**").hasAnyAuthority("admin", "supervisor")
+                .antMatchers("/edit-message**").hasAnyAuthority("admin", "moderator")
                 .antMatchers("/delete-message").hasAnyAuthority("admin", "moderator")
                 .antMatchers("/h2-console/**").permitAll() // this will allow access to h2-console
                 .and()

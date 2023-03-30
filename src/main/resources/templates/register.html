@@ -77,7 +77,7 @@
                 <form id="register-form" method="post" action="" role="form" th:action="@{/get-register}" th:object="${registerMember}">
                   <div class="messages"></div>
                   <div class="controls">
-                    <div class="row">
+                    <div class="row flex-nowrap">
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="form_name">Firstname *</label>
@@ -93,6 +93,16 @@
                           <div class="help-block with-errors"></div>
                         </div>
                       </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="form_challenge">Favourite Teacher *</label>
+                                <input id="form_lastname" type="text" name="challenge" class="form-control"
+                                       placeholder="Please enter your favourite teacher" required="required"
+                                       data-error="Challenge is required."
+                                       th:field="*{challenge}">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                       <div class="col-md-6">
@@ -131,6 +141,7 @@
                           <div th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Invalid lastname</div>
                           <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Invalid lastname</div>
                           <div th:if="${#fields.hasErrors('confirmation')}" th:errors="*{confirmation}">Invalid lastname</div>
+                          <div th:if="${#fields.hasErrors('challenge')}" th:errors="*{challenge}">Invalid Answer</div>
                       </div>
                     </div>
                   </div>

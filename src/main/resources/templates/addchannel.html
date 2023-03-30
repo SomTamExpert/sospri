@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>SoSpri-the-page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/pr_bbw.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script>
+    $(function() {
+      $("#includedHeader").load("fragments/header.html");
+      $("#includedFooter").load("fragments/footer.html");
+    });
+  </script>
+</head>
+
+<body>
+  <div id="includedHeader" ></div>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div>
+            <h4 style="margin-top: 30px">Edit Channel</h4>
+            <div class="row">
+              <div class=" col-lg-8 col-lg-offset-2">
+                <form id="register-form" method="post" action="" role="form" th:action="@{/add-channel}" th:object="${channel}">
+                  <div class="messages"></div>
+                  <div class="controls">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="form_topic">Topic *</label>
+                          <input id="form_topic" type="text" name="topic" class="form-control" placeholder="Please enter a topic" required="required" data-error="Author is required." th:field="*{topic}">
+                          <div class="help-block with-errors"></div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="form_description">Description *</label>
+                          <input id="form_description" type="text" name="description" class="form-control" placeholder="Please enter a description" required="required" data-error="Origin is required." th:field="*{description}">
+                          <div class="help-block with-errors"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <input type="submit" class="btn btn-success btn-send" value="Save">
+                        <p></p>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div style="height: 200px"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="includedFooter" class="fixed-bottom"></div>
+</body>
+
+</html>

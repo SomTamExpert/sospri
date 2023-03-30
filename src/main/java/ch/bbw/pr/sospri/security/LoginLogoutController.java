@@ -1,4 +1,4 @@
-package ch.bbw.pr.sospri;
+package ch.bbw.pr.sospri.security;
 
 import ch.bbw.pr.sospri.member.MemberService;
 import ch.bbw.pr.sospri.member.ResetMember;

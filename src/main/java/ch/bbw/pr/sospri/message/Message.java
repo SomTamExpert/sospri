@@ -10,6 +10,7 @@ import ch.bbw.pr.sospri.channel.Channel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -30,7 +31,7 @@ public class Message {
     private Long id;
 
     @NotEmpty(message = "content may not be empty")
-    @Size(min = 2, max = 512, message = "Die Länge der Message muss 2 bis 512 Zeichen sein.")
+    @Size(min = 2, max = 1012, message = "Die Länge der Message muss 2 bis 512 Zeichen sein.")
     private String content;
 
     //@NotEmpty (message = "author may not be empty" )
@@ -39,8 +40,7 @@ public class Message {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date origin;
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "channel_id")
     private Channel channel;
 }

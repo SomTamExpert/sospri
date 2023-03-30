@@ -36,6 +36,7 @@ public class MemberService implements UserDetailsService {
         member.setPassword(encryptionService.bCryptPasswordEncoder(registerMember.getPassword()));
         member.setAuthority("member");
         member.setUsername(registerMember.getPrename().toLowerCase() + "." + registerMember.getLastname().toLowerCase());
+        member.setChallenge(registerMember.getChallenge());
         repository.save(member);
     }
 

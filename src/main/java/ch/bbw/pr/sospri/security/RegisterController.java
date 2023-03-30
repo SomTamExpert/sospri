@@ -1,4 +1,4 @@
-package ch.bbw.pr.sospri;
+package ch.bbw.pr.sospri.security;
 
 import ch.bbw.pr.sospri.member.Member;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class RegisterController {
             return "register";
         } else {
             memberservice.add(registerMember);
-            return "registerconfirmed";
+            return "login";
         }
     }
 }
