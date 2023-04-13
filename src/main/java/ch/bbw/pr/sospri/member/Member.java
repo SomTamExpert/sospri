@@ -16,8 +16,8 @@ import javax.validation.constraints.Size;
 /**
  * A chat-member
  *
- * @author Peter Rutschmann
- * @version 15.03.2023
+ * @author Marco Karpf
+ * @version 13.04.2023
  */
 @Entity
 @Table(name = "member")

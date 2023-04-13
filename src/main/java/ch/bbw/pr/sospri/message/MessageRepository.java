@@ -5,8 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 
 /**
  * MessageRepository
- * @author Peter Rutschmann
- * @version 15.03.2023
+ * @author Marco Karpf
+ * @version 13.04.2023
  */
 public interface MessageRepository extends CrudRepository<Message, Long> {
      Iterable<Message> findAllByChannelId(Long channelId);

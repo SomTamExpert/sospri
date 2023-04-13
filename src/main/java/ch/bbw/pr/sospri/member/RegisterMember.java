@@ -11,8 +11,8 @@ import javax.validation.constraints.Size;
 /**
  * To regist a new Member
  *
- * @author Peter Rutschmann
- * @version 15.03.2023
+ * @author Marco Karpf
+ * @version 13.04.2023
  */
 @Getter
 @Setter

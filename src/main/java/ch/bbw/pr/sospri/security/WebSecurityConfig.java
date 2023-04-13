@@ -1,6 +1,7 @@
 package ch.bbw.pr.sospri.security;
 
 import ch.bbw.pr.sospri.member.MemberService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 
-
+@Slf4j
 @Configuration
 @EnableWebSecurity // enables Spring Security’s web security support and provides the Spring MVC integration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -26,7 +27,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         try {
             auth.authenticationProvider(daoAuthenticationProvider());
         } catch (Exception e) {
+            log.error("Error in globalSecurityConfiguration: " + e.getMessage());
             throw new Exception("Error in globalSecurityConfiguration: " + e.getMessage());
+
         }
     }
 
@@ -44,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     protected void configure(HttpSecurity http) throws Exception { // will call a login form to authenticate users on call http://localhost:8080/
-        System.out.println(("Using default configure(HttpSecurity). If subclassed this will potentially override subclass configure(HttpSecurity)."));
+        log.info("Using default configure(HttpSecurity). If subclassed this will potentially override subclass configure(HttpSecurity).");
 
         http
                 .sessionManagement()

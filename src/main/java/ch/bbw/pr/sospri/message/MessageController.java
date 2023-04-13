@@ -3,6 +3,7 @@ package ch.bbw.pr.sospri.message;
 import ch.bbw.pr.sospri.channel.ChannelService;
 import ch.bbw.pr.sospri.member.Member;
 import ch.bbw.pr.sospri.member.MemberService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 import java.util.Date;
 
+@Slf4j
 @Controller
 public class MessageController {
     @Autowired
@@ -29,47 +31,50 @@ public class MessageController {
 
     @GetMapping("/edit-message")
     public String editMessage(@RequestParam(name = "id", required = true) long id, Model model) {
+        log.info("getEditMessage with id: " + id);
         Message message = messageservice.getById(id);
-        System.out.println("editMessage get: " + message);
         model.addAttribute("message", message);
         return "editmessage";
     }
 
     @PostMapping("/edit-message")
-    public String editMessage(Message message, Model model) {
-        System.out.println("editMessage post: edit message" + message);
+    public String editMessage(Message message) {
+        log.info("postEditMessage with id: " + message.getId());
         Message value = messageservice.getById(message.getId());
         value.setContent(message.getContent());
-        System.out.println("editMessage post: update message" + value);
         messageservice.update(message.getId(), value);
+        log.info("postEditMessage with id: " + message.getId() + " done");
         return "redirect:/get-channels";
     }
 
     @PostMapping("/add-message")
     public String postRequestChannel(Model model, @ModelAttribute @Valid Message message, BindingResult bindingResult) {
-        System.out.println("postRequestChannel(): message: " + message.toString());
+        log.info("postRequestChannel(): message: " + message.toString());
         if (bindingResult.hasErrors()) {
-            System.out.println("postRequestChannel(): has Error(s): " + bindingResult.getErrorCount());
+            log.warn("postRequestChannel(): has Error(s): " + bindingResult.getErrorCount());
             model.addAttribute("messages", messageservice.getAll());
             return "channel";
         }
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Member tmpMember;
         if (authentication != null) {
+            log.info("postRequestChannel(): authentication: " + authentication.getName());
             tmpMember = memberservice.getUserByUsername(authentication.getName());
         } else {
-            tmpMember = memberservice.getById(4L);
+            log.warn("postRequestChannel(): authentication is null");
+            return "redirect:/login";
         }
         message.setAuthor(tmpMember.getPrename() + " " + tmpMember.getLastname());
         message.setOrigin(new Date());
         messageservice.add(message);
-
+        log.info("postRequestChannel(): message {} ", message + " added");
         return "redirect:/get-channels";
     }
 
     @GetMapping("/delete-message")
-    public String deleteMessage(@RequestParam(name = "id", required = true) long id, Model model) {
+    public String deleteMessage(@RequestParam(name = "id", required = true) long id) {
         System.out.println("deleteMessage: " + id);
+        log.info("getDeleteMessage by id {} ", id);
         messageservice.deleteById(id);
         return "redirect:/get-channels";
     }

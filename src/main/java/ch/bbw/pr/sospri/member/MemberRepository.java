@@ -7,8 +7,8 @@ import java.util.Optional;
 /**
  * MemberRepository
  * 
- * @author Peter Rutschmann
- * @version 15.03.2023
+ * @author Marco Karpf
+ * @version 13.04.2023
  */
 
 public interface MemberRepository extends CrudRepository<Member, Long>{
