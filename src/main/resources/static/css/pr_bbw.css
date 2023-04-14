@@ -49,6 +49,9 @@
 .media .pull-right {
     margin-left: 15px;
 }
+.submit {
+    width: 184px;
+}
 
 #password-strength-bar {
     height: 20px;

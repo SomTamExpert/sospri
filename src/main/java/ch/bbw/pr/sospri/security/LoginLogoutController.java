@@ -7,17 +7,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Map;
+
+import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.toMap;
 
 @Slf4j
 @Controller
 public class LoginLogoutController {
     @Autowired
     MemberService memberservice;
+
+    private final String URI_BASE = "/oauth2/authorization/";
+    private final List<String> clients =
+            List.of("Facebook", "Google", "GitHub");
 
     @RequestMapping("/login")
     public String login() {
@@ -48,12 +58,14 @@ public class LoginLogoutController {
         memberservice.resetPassword(username, password);
         return "login";
     }
+
     @RequestMapping("/request-password-reset")
     public String requestPasswordReset(Model model) {
         log.info(" getRequestPasswordReset");
         model.addAttribute("resetMember", new ResetMember());
         return "requestpasswordreset";
     }
+
     @PostMapping("/request-password-reset")
     public String requestPasswordReset(@ModelAttribute("resetMember") ResetMember resetMember, BindingResult bindingResult, Model model) {
         log.info("postRequestPasswordReset");
@@ -68,5 +80,17 @@ public class LoginLogoutController {
             log.warn("challenge answer incorrect from user {}", username);
             return "requestpasswordreset";
         }
+    }
+
+    @GetMapping("/oauth2login")
+    public String oAuth2LoginPage(Model model) {
+
+        Map<String, String> clientUrls =
+                clients.stream().collect(
+                        toMap(identity(),
+                                client -> URI_BASE + client.toLowerCase()));
+
+        model.addAttribute("clientUrls", clientUrls);
+        return "oauth2login";
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
+
 
 @Slf4j
 @Configuration
@@ -46,6 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
     protected void configure(HttpSecurity http) throws Exception { // will call a login form to authenticate users on call http://localhost:8080/
         log.info("Using default configure(HttpSecurity). If subclassed this will potentially override subclass configure(HttpSecurity).");
 
@@ -70,6 +71,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().loginPage("/login").permitAll()
                 .and()
+                .oauth2Login().loginPage("/oauth2login")
+                .and()
                 .logout().permitAll()
                 .and()
                 .exceptionHandling()
@@ -79,6 +82,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .headers().frameOptions().sameOrigin();
     }
+
 
 
 }

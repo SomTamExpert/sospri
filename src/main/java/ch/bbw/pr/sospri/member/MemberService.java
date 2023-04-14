@@ -70,15 +70,14 @@ public class MemberService implements UserDetailsService {
         }
     }
 
-    public Member getUserByUsername(String username) {
-        Optional<Member> member = repository.findByUsername(username);
-        if (member.isPresent()) {
-            log.info("found member with username {}", username);
-            return member.get();
-        } else {
+    public Member getUserByUsername(String username) throws UsernameNotFoundException {
+        log.info("getting member by username {}", username);
+        Member member = repository.findByUsername(username);
+        if (member == null) {
             log.warn("member with username {} not found", username);
-            return null;
+            throw new UsernameNotFoundException("member with username " + username + " not found");
         }
+        return member;
     }
 
     public boolean isChallengeAnswerCorrect(String username, String challengeAnswer) {
