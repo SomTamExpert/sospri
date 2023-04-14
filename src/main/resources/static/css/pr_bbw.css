@@ -7,9 +7,15 @@
 }
 
 @keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 
@@ -49,8 +55,15 @@
 .media .pull-right {
     margin-left: 15px;
 }
+
 .submit {
     width: 184px;
+}
+
+.external-link,
+.external-link:hover {
+    color: white;
+    text-decoration: none;
 }
 
 #password-strength-bar {
