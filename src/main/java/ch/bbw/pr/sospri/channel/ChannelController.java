@@ -66,7 +66,6 @@ public class ChannelController {
 
     @PostMapping("/edit-channel")
     public String editChannel(Model model, @ModelAttribute @Valid Channel channel, BindingResult bindingResult) {
-        System.out.println("postRequestChannel(): channel: " + channel.toString());
         log.info("postEditChannel {} ", channel.getTopic());
         if (bindingResult.hasErrors()) {
             log.warn("postEditChannel has errors {} ", bindingResult.getErrorCount());

@@ -33,7 +33,6 @@ public class MembersController {
    @GetMapping("/edit-member")
    public String editMember(@RequestParam(name = "id", required = true) long id, Model model) {
       Member member = memberservice.getById(id);
-      System.out.println("editMember get: " + member);
       log.info("getEditMember {} ", member.getPrename() + " " + member.getLastname());
       model.addAttribute("member", member);
       return "editmember";

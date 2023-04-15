@@ -73,7 +73,6 @@ public class MessageController {
 
     @GetMapping("/delete-message")
     public String deleteMessage(@RequestParam(name = "id", required = true) long id) {
-        System.out.println("deleteMessage: " + id);
         log.info("getDeleteMessage by id {} ", id);
         messageservice.deleteById(id);
         return "redirect:/get-channels";

@@ -10,7 +10,6 @@ public class ReCaptchaSettings {
     public String secret;
 
     public String getSite() {
-        System.out.println("Site: " + site);
         return site;
     }
 
