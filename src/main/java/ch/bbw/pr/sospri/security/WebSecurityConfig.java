@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 
 
 @Slf4j
@@ -21,6 +22,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private OAuth2UserService oAuth2UserService;
+
+    @Autowired
+    private OAuth2AuthorizedClientService oAuth2AuthorizedClientService;
+
+    @Autowired
+    OAuth2Config oAuth2Config;
 
     @Autowired
     public void globalSecurityConfiguration(AuthenticationManagerBuilder auth) throws Exception {
@@ -42,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder  passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -69,11 +79,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/delete-message").hasAnyAuthority("admin", "moderator")
                 .antMatchers("/h2-console/**").permitAll() // this will allow access to h2-console
                 .and()
+                .oauth2Login()
+                .loginPage("/login")
+                .userInfoEndpoint()
+                .userService(oAuth2UserService)
+                .and()
+                .clientRegistrationRepository(oAuth2Config.clientRegistrationRepository())
+                .authorizedClientService(oAuth2AuthorizedClientService)
+                .and()
+                .oauth2Client()
+                .and()
                 .formLogin().loginPage("/login").permitAll()
                 .and()
-                .oauth2Login().loginPage("/oauth2login")
-                .and()
-                .logout().permitAll()
+                .logout()
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
                 .and()
                 .exceptionHandling()
                 .accessDeniedPage("/forbidden")
@@ -82,7 +102,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .headers().frameOptions().sameOrigin();
     }
-
-
 
 }
