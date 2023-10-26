@@ -35,7 +35,7 @@ public class Message {
     private String content;
 
     //@NotEmpty (message = "author may not be empty" )
-    @Size(min = 5, max = 20, message = "Die Länge des Autors 2 bis 20 Zeichen sein.")
+    @Size(min = 5, max = 50, message = "Die Länge des Autors 2 bis 20 Zeichen sein.")
     private String author;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

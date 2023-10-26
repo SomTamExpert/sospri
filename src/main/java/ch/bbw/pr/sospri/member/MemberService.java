@@ -49,6 +49,10 @@ public class MemberService implements UserDetailsService {
         }
     }
 
+    public void addOauthUser(Member member) {
+        repository.save(member);
+    }
+
     public void update(Long id, Member member) {
         log.warn("updating member {}", member.getPrename() + " " + member.getLastname());
         repository.save(member);

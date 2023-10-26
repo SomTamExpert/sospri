@@ -1,6 +1,10 @@
 package ch.bbw.pr.sospri.security;
 
+import ch.bbw.pr.sospri.member.Member;
+import ch.bbw.pr.sospri.member.MemberRepository;
+import ch.bbw.pr.sospri.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -15,13 +19,35 @@ import java.util.*;
 @Component
 public class OAuth2UserService extends DefaultOAuth2UserService {
 
+    @Autowired
+    private MemberRepository memberRepository;
+
+    @Autowired
+    MemberService memberservice;
+
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User user = super.loadUser(userRequest);
+        System.out.println("user " + user.getName());
         Map<String, Object> attributes = new HashMap<>(user.getAttributes());
+        System.out.println("attributes " + attributes);
         attributes.put("sub", user.getName());
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         log.info("OAuth2UserService.loadUser(): registrationId: " + registrationId);
+        if( memberRepository.findById(Long.valueOf(user.getName())).isEmpty() ) {
+            System.out.println("member is empty");
+            Member member = new Member();
+            member.setAuthority("member");
+            member.setUsername(user.getName());
+            String username = user.getAttributes().get("login").toString();
+            String[] parts = username.split("-");
+            String firstName = parts[0]; // "marco"
+            String lastName = parts[1];
+            member.setPrename(firstName);
+            member.setLastname(lastName);
+
+            memberservice.addOauthUser(member);
+        }
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority("member")),
                 attributes,

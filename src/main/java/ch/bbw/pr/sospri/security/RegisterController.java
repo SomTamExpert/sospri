@@ -41,6 +41,7 @@ public class RegisterController {
     @PostMapping("/get-register")
     public String postRequestRegisterMembers(@Valid RegisterMember registerMember, BindingResult bindingResult, @RequestParam(name = "g-recaptcha-response") String captcha, Model model) {
         log.info("postRequestRegisterMembers");
+        log.info("registerMember: " + registerMember.getPrename() + " " + registerMember.getLastname());
         if (! reCaptchaValidationService.validateCaptcha(captcha)) {
             log.warn("captcha of registerMember {} is not valid", registerMember.getPrename() + " " + registerMember.getPrename());
             bindingResult.rejectValue("prename", "error.prename", "the captcha is not valid.");
@@ -57,6 +58,7 @@ public class RegisterController {
             log.warn("bindingResult of registerMember {} has errors", registerMember.getPrename() + " " + registerMember.getLastname());
             return "register";
         } else {
+            log.info("registerMember {} is valid", registerMember.getPrename() + " " + registerMember.getLastname());
             memberservice.add(registerMember);
             return "login";
         }
