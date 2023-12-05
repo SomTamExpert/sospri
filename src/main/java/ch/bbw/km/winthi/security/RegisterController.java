@@ -1,8 +1,8 @@
-package ch.bbw.pr.sospri.security;
+package ch.bbw.km.winthi.security;
 
-import ch.bbw.pr.sospri.Recaptcha.ReCaptchaValidationService;
-import ch.bbw.pr.sospri.member.MemberService;
-import ch.bbw.pr.sospri.member.RegisterMember;
+import ch.bbw.km.winthi.Recaptcha.ReCaptchaValidationService;
+import ch.bbw.km.winthi.member.MemberService;
+import ch.bbw.km.winthi.member.RegisterMember;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
-import java.util.List;
-
 
 
 /**

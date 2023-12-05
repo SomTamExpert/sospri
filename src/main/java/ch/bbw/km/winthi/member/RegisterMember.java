@@ -1,4 +1,4 @@
-package ch.bbw.pr.sospri.member;
+package ch.bbw.km.winthi.member;
 
 import lombok.Getter;
 import lombok.Setter;
