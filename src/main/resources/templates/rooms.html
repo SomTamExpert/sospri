@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Winthihome</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+    <!-- Bootstrap Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>
+    <link rel="stylesheet" href="css/ch_bbw_km.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(function () {
+            $("#includedHeader").load("fragments/header.html");
+            $("#includedFooter").load("fragments/footer.html");
+        });
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+            console.log("DOM fully loaded and parsed");
+            var element = document.getElementById("includedHeader");
+            element.scrollTop = element.scrollHeight;
+        });
+
+        function filterRooms(categoryTitle) {
+            // Set visibility to hidden for all rooms
+            $('.room-card').css('visibility', 'hidden');
+
+            // Remove active class from all categories
+            $('.category-filter').removeClass('active');
+
+            // Add active class to selected category
+            $(`.category-filter[data-category-title='${categoryTitle}']`).addClass('active');
+
+            // Set visibility to visible for rooms of the selected category or show all if 'all' category is selected
+            if (categoryTitle === 'all') {
+                $('.room-card').css('visibility', 'visible');
+                $('body').css('background', 'lightgrey');
+            } else {
+                $(`.room-card[data-category-title='${categoryTitle}']`).css('visibility', 'visible');
+                $('body').css('background', 'grey');
+            }
+        }
+    </script>
+    <style>
+        /* Custom CSS for link styles */
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        body {
+            overflow: auto;
+            height: auto;
+        }
+
+        .room-card {
+            margin: auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        a:hover {
+            color: black;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+
+    </style>
+</head>
+
+<body>
+<div id="includedHeader"></div>
+
+<section class="categories d-flex justify-content-center align-items-center">
+    <div class="row text-center mt-2" style="width: 50%">
+        <div class="col-md-3" th:each="category : ${categories}">
+            <a th:href="@{'#'}" class="category-filter" th:data-category-title="${category.title}"
+               onclick="filterRooms(this.getAttribute('data-category-title'))">
+                <i th:class="${category.icon}"></i>
+                <p class="category-text" th:text="${category.title}"></p>
+            </a>
+        </div>
+        <a th:href="@{'#'}" class="category-filter" onclick="filterRooms('all')" data-category-id="all">
+            Show All
+        </a>
+    </div>
+</section>
+
+<div class="container">
+    <div class="mx-auto mb-5">
+        <section class="rooms">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4 " th:each="room : ${rooms}">
+                        <div class="card h-100 room-card" th:data-category-title="${room.category.title}">
+                            <img th:src="${room.img}" class="card-img-top" th:alt="${'Room ' + room.id}">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title" th:text="${room.title}"></h5>
+                                <p class="card-text" th:text="${room.content}"></p>
+                                <p class="card-text"><strong>Price:</strong> CHF <span th:text="${room.price}"></span>
+                                    / night</p>
+                                <p class="card-text"><strong>Category:</strong> <span
+                                        th:text="${room.category.title}"></span></p>
+                                <p class="card-text">
+                                    <strong>Status:</strong>
+                                    <i th:if="${room.booked}" class="fas fa-times-circle text-danger"></i>
+                                    <i th:unless="${room.booked}" class="fas fa-check-circle text-success"></i>
+                                    <span th:if="${room.booked}">Booked</span>
+                                    <span th:unless="${room.booked}">Available</span>
+                                </p>
+                                <a th:href="@{/get-booking-form?id={id}(id=${room.id})}" class="btn btn-dark mt-auto">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+<div id="includedFooter" class="fixed-bottom"></div>
+</body>
+
+</html>
