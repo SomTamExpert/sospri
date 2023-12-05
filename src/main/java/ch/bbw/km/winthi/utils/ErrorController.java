@@ -1,4 +1,4 @@
-package ch.bbw.pr.sospri.utils;
+package ch.bbw.km.winthi.utils;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
