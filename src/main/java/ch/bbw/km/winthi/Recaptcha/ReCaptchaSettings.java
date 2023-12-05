@@ -1,4 +1,4 @@
-package ch.bbw.pr.sospri.Recaptcha;
+package ch.bbw.km.winthi.Recaptcha;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

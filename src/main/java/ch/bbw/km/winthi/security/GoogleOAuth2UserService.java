@@ -1,4 +1,4 @@
-package ch.bbw.pr.sospri.security;
+package ch.bbw.km.winthi.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;

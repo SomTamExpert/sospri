@@ -1,4 +1,4 @@
-package ch.bbw.pr.sospri.Recaptcha;
+package ch.bbw.km.winthi.Recaptcha;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
-package ch.bbw.pr.sospri.member;
+package ch.bbw.km.winthi.member;
 
-import ch.bbw.pr.sospri.security.EncryptionService;
+import ch.bbw.km.winthi.security.EncryptionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,8 +8,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 /**
  * MemberService
@@ -79,7 +77,7 @@ public class MemberService implements UserDetailsService {
         Member member = repository.findByUsername(username);
         if (member == null) {
             log.warn("member with username {} not found", username);
-            throw new UsernameNotFoundException("member with username " + username + " not found");
+            return null;
         }
         return member;
     }

@@ -1,6 +1,6 @@
-package ch.bbw.pr.sospri.security;
+package ch.bbw.km.winthi.security;
 
-import ch.bbw.pr.sospri.member.MemberService;
+import ch.bbw.km.winthi.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -70,8 +70,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/get-members").hasAuthority("admin")
-                .antMatchers("/get-channel?name=Secret").hasAuthority("admin")
-                .antMatchers("/get-channel**").hasAnyAuthority("member", "admin", "supervisor", "moderator")
+//                .antMatchers("/get-channel?name=Secret").hasAuthority("admin")
+//                .antMatchers("/get-channel**").hasAnyAuthority("member", "admin", "supervisor", "moderator")
                 .antMatchers("/add-channel").hasAnyAuthority("admin", "supervisor")
                 .antMatchers("/edit-channel**").hasAnyAuthority("admin", "supervisor")
                 .antMatchers("/delete-channel**").hasAnyAuthority("admin", "supervisor")

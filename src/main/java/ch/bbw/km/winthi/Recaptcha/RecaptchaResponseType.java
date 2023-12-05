@@ -1,4 +1,4 @@
-package ch.bbw.pr.sospri.Recaptcha;
+package ch.bbw.km.winthi.Recaptcha;
 
 public class RecaptchaResponseType {
     private boolean success;

@@ -1,8 +1,8 @@
-package ch.bbw.pr.sospri.security;
+package ch.bbw.km.winthi.security;
 
-import ch.bbw.pr.sospri.member.Member;
-import ch.bbw.pr.sospri.member.MemberRepository;
-import ch.bbw.pr.sospri.member.MemberService;
+import ch.bbw.km.winthi.member.Member;
+import ch.bbw.km.winthi.member.MemberRepository;
+import ch.bbw.km.winthi.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
