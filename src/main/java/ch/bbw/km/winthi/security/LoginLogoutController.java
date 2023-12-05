@@ -1,7 +1,7 @@
-package ch.bbw.pr.sospri.security;
+package ch.bbw.km.winthi.security;
 
-import ch.bbw.pr.sospri.member.MemberService;
-import ch.bbw.pr.sospri.member.ResetMember;
+import ch.bbw.km.winthi.member.MemberService;
+import ch.bbw.km.winthi.member.ResetMember;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
