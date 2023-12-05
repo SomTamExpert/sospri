@@ -1,4 +1,4 @@
-package ch.bbw.pr.sospri.member;
+package ch.bbw.km.winthi.member;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
