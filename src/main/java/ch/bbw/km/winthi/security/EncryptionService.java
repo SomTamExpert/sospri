@@ -1,4 +1,4 @@
-package ch.bbw.pr.sospri.security;
+package ch.bbw.km.winthi.security;
 
 
 import lombok.extern.slf4j.Slf4j;
