@@ -1,4 +1,4 @@
-package ch.bbw.pr.sospri.channel;
+package ch.bbw.km.winthi.channel;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

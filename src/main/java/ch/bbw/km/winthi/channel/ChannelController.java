@@ -1,6 +1,5 @@
-package ch.bbw.pr.sospri.channel;
+package ch.bbw.km.winthi.channel;
 
-import java.util.Date;
 import java.util.List;
 import javax.validation.Valid;
 
@@ -13,12 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import ch.bbw.pr.sospri.member.MemberService;
-import ch.bbw.pr.sospri.message.Message;
-import ch.bbw.pr.sospri.message.MessageService;
+import ch.bbw.km.winthi.member.MemberService;
+import ch.bbw.km.winthi.message.Message;
+import ch.bbw.km.winthi.message.MessageService;
 
 /**
- * ChannelController
+ * BookingController
  *
  * @author Marco Karpf
  * @version 13.04.2023

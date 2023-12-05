@@ -1,4 +1,4 @@
-package ch.bbw.pr.sospri.channel;
+package ch.bbw.km.winthi.channel;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
 @Getter
 @Setter
 @ToString
-public class Channel {
+    public class Channel {
     @Id
     @GeneratedValue(generator = "generatorMember", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "generatorMember", initialValue = 20)
