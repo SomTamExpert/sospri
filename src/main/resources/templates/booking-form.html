@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Winthihome</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+    <!-- Bootstrap Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>
+    <link rel="stylesheet" href="css/ch_bbw_km.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(function () {
+            $("#includedHeader").load("fragments/header.html");
+            $("#includedFooter").load("fragments/footer.html");
+        });
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+            console.log("DOM fully loaded and parsed");
+            var element = document.getElementById("includedHeader");
+            element.scrollTop = element.scrollHeight;
+        });
+
+        function calculateBookingPrice() {
+            const startDate = new
+
+            Date(document.getElementById("start-date").value);
+            const endDate = new
+
+            Date(document.getElementById("end-date").value);
+            const priceString = document.getElementById("room-price").innerText;
+            const pricePerNight = priceString.replace(/[^\d.-]/g, "");
+
+            if (!startDate || !endDate) {
+                return; // Don't calculate if either date is missing
+            }
+
+            const timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+            const nightCount = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+            const totalPrice = nightCount * pricePerNight;
+
+            document.getElementById("booking-price").value = totalPrice.toFixed(2);
+            document.getElementById("booking-price-input").value = totalPrice.toFixed(2);
+        }
+
+    </script>
+    <style>
+        /* Custom CSS for link styles */
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        body {
+            overflow: auto;
+            height: auto;
+        }
+
+    </style>
+</head>
+
+<body>
+<div id="includedHeader"></div>
+
+<div class="container mt-3">
+    <div class="mx-auto mb-5">
+        <!-- Rooms Section -->
+        <section class="rooms">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img th:src="${room.img}" class="card-img-top" th:alt="${'Room ' + room.id}">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${room.title}"></h5>
+                                <p class="card-text" th:text="${room.content}"></p>
+                                <p id="room-price" class="card-text"><strong>Price:</strong> CHF <span
+                                        th:text="${room.price}"></span>
+                                    per night</p>
+                                <p class="card-text"><strong>Category:</strong> <span
+                                        th:text="${room.category.title}"></span></p>
+                                <p class="card-text">
+                                    <strong>Status:</strong>
+                                    <i th:if="${room.booked}" class="fas fa-times-circle text-danger"></i>
+                                    <i th:unless="${room.booked}" class="fas fa-check-circle text-success"></i>
+                                    <span th:if="${room.booked}">Booked</span>
+                                    <span th:unless="${room.booked}">Available</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <form id="booking-form" method="post" th:action="@{/add-booking}" role="form"
+                              th:object="${booking}">
+                            <div class="messages"></div>
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="start-date">Start Date *</label>
+                                            <input id="start-date" type="date" name="startDate" class="form-control"
+                                                   required="required"
+                                                   th:value="*{startDate}" onchange="calculateBookingPrice()"/>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="end-date">End Date *</label>
+                                            <input id="end-date" type="date" name="endDate" class="form-control"
+                                                   required="required"
+                                                   th:value="*{endDate}" onchange="calculateBookingPrice()"/>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="booking-price">Total Price:</label>
+                                            <input id="booking-price" type="text" class="form-control"
+                                                   readonly="readonly" th:value="*{price}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Inside the <form> element -->
+                                <input type="hidden" name="roomId" th:value="${room.id}"/>
+                                <input type="hidden" name="price" id="booking-price-input" th:value="${booking.price}"/>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="submit" class="btn btn-success btn-send" name="submit"
+                                               value="Book Now">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-12">
+                                    <div th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"> Invalid Booking
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <div id="includedFooter" class="fixed-bottom"></div>
+</div>
+</body>
+
+</html>
