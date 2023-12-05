@@ -9,10 +9,10 @@
         <version>2.2.5.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>ch.bbw.pr.chat</groupId>
-    <artifactId>SpringBootChatAppSoSpri</artifactId>
+    <groupId>ch.bbw.km.chat</groupId>
+    <artifactId>WinthiHomeApp</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBootChatAppSoSpri</name>
+    <name>SpringBootChatAppwinthi</name>
     <description>The Spring Boot Chat basis application</description>
 
     <properties>
@@ -63,6 +63,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
             <optional>true</optional>
         </dependency>
         <dependency>
