@@ -1,4 +1,4 @@
-# SoSpri
+# winthi
 This is a project that consists of a web page and an editing form for a member.
 
 <img src="src/main/resources/static/img/362px-Cicero.png" alt="statue of cicero" width="300" height="500"  style="float:right;">
