@@ -1,4 +1,4 @@
-package ch.bbw.pr.sospri.message;
+package ch.bbw.km.winthi.message;
 
 import java.util.Date;
 
@@ -6,11 +6,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import ch.bbw.pr.sospri.channel.Channel;
+import ch.bbw.km.winthi.channel.Channel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -31,7 +30,7 @@ public class Message {
     private Long id;
 
     @NotEmpty(message = "content may not be empty")
-    @Size(min = 2, max = 1012, message = "Die Länge der Message muss 2 bis 512 Zeichen sein.")
+    @Size(min = 2, max = 1012, message = "Die Länge der Room muss 2 bis 512 Zeichen sein.")
     private String content;
 
     //@NotEmpty (message = "author may not be empty" )

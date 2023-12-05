@@ -1,10 +1,9 @@
-package ch.bbw.pr.sospri.message;
+package ch.bbw.km.winthi.message;
 
-import ch.bbw.pr.sospri.channel.Channel;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * MessageRepository
+ * RoomRepository
  * @author Marco Karpf
  * @version 13.04.2023
  */

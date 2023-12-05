@@ -1,6 +1,5 @@
-package ch.bbw.pr.sospri.message;
+package ch.bbw.km.winthi.message;
 
-import ch.bbw.pr.sospri.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * MessageService
+ * RoomService
  *
  * @author Marco Karpf
  * @version 13.04.2023
